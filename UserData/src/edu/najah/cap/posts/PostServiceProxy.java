@@ -1,25 +1,28 @@
 package edu.najah.cap.posts;
-
+import edu.najah.cap.data.ValidateUser;
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;
-import edu.najah.cap.exceptions.SystemBusyException;
-import edu.najah.cap.exceptions.Util;
-
 import java.util.*;
 
 
-public class PostService implements IPostService {
+public class PostServiceProxy implements IPostService {
 
-    private static final Map<String, List<Post>> posts = new HashMap<>();
 
-    @Override
-    public void addPost(Post post) {
-        posts.computeIfAbsent(post.getAuthor(), key -> new ArrayList<>()).add(post);
+    private static final Map<String, List<Post>> posts =PostService.getPosts();
+    private IPostService postService; // or PostService postService = new PostService();
+
+    public PostServiceProxy(IPostService postService) {
+        this.postService = postService;
     }
 
     @Override
-    public List<Post> getPosts(String author) throws SystemBusyException, BadRequestException, NotFoundException {
-        Util.validateUserName(author);
+    public void addPost(Post post) {
+        postService.addPost(post);
+    }
+
+    @Override
+    public List<Post> getPosts(String author) throws BadRequestException, NotFoundException {
+        ValidateUser.validateUser(author);
         if (!posts.containsKey(author)) {
             throw new NotFoundException("User does not exist");
         }
@@ -27,13 +30,13 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public void deletePost(String author, String id) throws SystemBusyException, BadRequestException, NotFoundException {
+    public void deletePost(String author, String id) throws BadRequestException, NotFoundException {
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        Util.validateUserName(author);
+        ValidateUser.validateUser(author);
         if (!posts.containsKey(author)) {
             throw new NotFoundException("User does not exist");
         }
@@ -48,9 +51,4 @@ public class PostService implements IPostService {
             }
         }
     }
-
-    public static Map<String, List<Post>> getPosts() {
-        return posts;
-    }
-
 }

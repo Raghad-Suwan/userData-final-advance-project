@@ -43,4 +43,11 @@ public class UserService implements IUserService {
         }
         return users.get(userName);
     }
+
+
+    public static Map<String, UserProfile> getUsers() {
+        return users;
+    }
+
+
 }

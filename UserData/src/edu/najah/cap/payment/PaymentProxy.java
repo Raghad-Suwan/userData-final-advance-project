@@ -1,38 +1,44 @@
 package edu.najah.cap.payment;
 
+import edu.najah.cap.data.ValidateUser;
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.exceptions.Util;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
-public class PaymentService implements IPayment {
+public class PaymentProxy implements IPayment {
+    private  IPayment paymentService;
 
-    private static final Map<String, List<Transaction>> transactionMap = new HashMap<>();
+    private static final Map<String, List<Transaction>> transactionMap = PaymentService.getTransactionsMap();
 
-
+   public PaymentProxy(IPayment paymentService) {
+        this.paymentService = paymentService;
+    }
     @Override
     public void pay(Transaction transaction) {
-        transactionMap.computeIfAbsent(transaction.getUserName(), key -> new ArrayList<>()).add(transaction);
+
+    paymentService.pay(transaction);
     }
 
     @Override
     public double getBalance(String userName) {
-        if (transactionMap.containsKey(userName)) {
-            return transactionMap.get(userName).stream().mapToDouble(Transaction::getAmount).sum();
-        }
+        paymentService.getBalance(userName);
         return 0;
     }
 
     @Override
-    public void removeTransaction(String userName, String id) throws SystemBusyException, BadRequestException, NotFoundException {
+    public void removeTransaction(String userName, String id) throws BadRequestException, NotFoundException {
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        Util.validateUserName(userName);
+        ValidateUser.validateUser(userName);
         if (!transactionMap.containsKey(userName)) {
             throw new NotFoundException("User does not exist");
         }
@@ -47,18 +53,12 @@ public class PaymentService implements IPayment {
     }
 
     @Override
-    public List<Transaction> getTransactions(String userName) throws SystemBusyException, BadRequestException, NotFoundException {
-        Util.validateUserName(userName);
+    public List<Transaction> getTransactions(String userName) throws BadRequestException, NotFoundException {
+      ValidateUser.validateUser(userName);
         if (!transactionMap.containsKey(userName)) {
             throw new NotFoundException("User does not exist");
         }
         return transactionMap.get(userName);
     }
-
-
-    public static Map<String, List<Transaction>> getTransactionsMap() {
-        return transactionMap;
-    }
-
 
 }
