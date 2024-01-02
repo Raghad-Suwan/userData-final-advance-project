@@ -55,6 +55,7 @@ public class PaymentService implements IPayment {
         return transactionMap.get(userName);
     }
 
+
     public static Map<String, List<Transaction>> getTransactionsMap() {
         return transactionMap;
     }

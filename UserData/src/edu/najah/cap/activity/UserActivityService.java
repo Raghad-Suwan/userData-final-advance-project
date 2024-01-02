@@ -45,6 +45,7 @@ public class UserActivityService implements IUserActivityService {
         }
         userActivityMap.put(userId, userActivityMap.get(userId));
     }
+
     public static Map<String, List<UserActivity>> getUserActivityMap() {
         return userActivityMap;
     }

@@ -7,7 +7,9 @@ import edu.najah.cap.exceptions.Util;
 
 import java.util.*;
 
-public class PostService implements IPostService{
+
+public class PostService implements IPostService {
+
     private static final Map<String, List<Post>> posts = new HashMap<>();
 
     @Override
@@ -46,7 +48,9 @@ public class PostService implements IPostService{
             }
         }
     }
+
     public static Map<String, List<Post>> getPosts() {
         return posts;
     }
+
 }
