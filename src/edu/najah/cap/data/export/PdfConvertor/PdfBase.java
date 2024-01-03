@@ -23,12 +23,12 @@ public abstract class PdfBase<T> implements Converter<T> {
 
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-            int currentHeight = 700; // Adjust as needed
-            final int lineHeight = 20; // Adjust as needed
+            int currentHeight = 700;
+            final int lineHeight = 20;
 
             contentStream.setFont(PDType1Font.HELVETICA, 12);
             contentStream.beginText();
-            contentStream.newLineAtOffset(50, currentHeight); // Starting position
+            contentStream.newLineAtOffset(50, currentHeight);
 
             for (T item : items) {
                 if (currentHeight <= lineHeight) {
@@ -40,11 +40,11 @@ public abstract class PdfBase<T> implements Converter<T> {
                     contentStream = new PDPageContentStream(document, page);
                     contentStream.setFont(PDType1Font.HELVETICA, 12);
                     contentStream.beginText();
-                    contentStream.newLineAtOffset(50, 700); // Adjust as needed
-                    currentHeight = 700; // Adjust as needed
+                    contentStream.newLineAtOffset(50, 700);
+                    currentHeight = 700;
                 }
 
-                drawContent(contentStream, item); // Delegate content drawing to subclasses
+                drawContent(contentStream, item);
                 currentHeight -= lineHeight;
                 contentStream.newLineAtOffset(0, -lineHeight);
             }

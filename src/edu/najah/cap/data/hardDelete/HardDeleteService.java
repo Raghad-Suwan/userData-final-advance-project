@@ -17,8 +17,11 @@ import edu.najah.cap.payment.IPayment;
 import edu.najah.cap.posts.IPostService;
 
 import java.util.concurrent.CompletableFuture;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HardDeleteService {
+    private static final Logger logger = LoggerFactory.getLogger(HardDeleteService.class);
     private final IPostService PostServiceProxy ;
     private final IUserService userServiceProxy ;
     private final IUserActivityService activityProxy;
@@ -68,7 +71,8 @@ public class HardDeleteService {
                     UserItemDeletion.deleteItems(userName, activityProxy.getUserActivity(userName),
                             new ActivityDeletionHandler(activityProxy), "activities");
                 } catch (SystemBusyException | NotFoundException | BadRequestException e) {
-                    throw new RuntimeException(e);
+                    logger.error("An error occurred in the deletion process for {}: {}", userName, e.getMessage());
+
                 }
             })
                     : CompletableFuture.completedFuture(null);
@@ -77,7 +81,7 @@ public class HardDeleteService {
 
             UserStateManager.markAsDeleted(userName);
             userServiceProxy.deleteUser(userName);
-
+            logger.info("Account and associated data deleted successfully for {}", userName);
             System.out.println("Account and associated data deleted successfully.");
 
         } catch (SystemBusyException | BadRequestException | NotFoundException e) {

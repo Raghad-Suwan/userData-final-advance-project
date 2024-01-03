@@ -15,25 +15,21 @@ public class PdfConverter {
 
     public byte[] convertUserProfileToPDF(UserProfile userProfile) {
         logger.info("Converting UserProfile to PDF: Username = {}", userProfile.getUserName());
-        // Return a placeholder byte array as actual conversion is not implemented
         return new byte[0];
     }
 
     public byte[] convertUserActivityToPDF(List<UserActivity> userActivities) {
         logger.info("Converting UserActivity list to PDF: Number of Activities = {}", userActivities.size());
-        // Return a placeholder byte array as actual conversion is not implemented
         return new byte[0];
     }
 
     public byte[] convertUserTransactionToPDF(List<Transaction> userTransactions) {
         logger.info("Converting UserTransaction list to PDF: Number of Transactions = {}", userTransactions.size());
-        // Return a placeholder byte array as actual conversion is not implemented
         return new byte[0];
     }
 
     public byte[] convertUserPostToPDF(List<Post> userPosts) {
         logger.info("Converting UserPost list to PDF: Number of Posts = {}", userPosts.size());
-        // Return a placeholder byte array as actual conversion is not implemented
         return new byte[0];
     }
 }
