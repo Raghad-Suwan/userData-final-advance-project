@@ -1,36 +1,47 @@
-package edu.najah.cap.activity;
+package edu.najah.cap.data.proxy;
 
+import edu.najah.cap.data.export.ValidateUser;
+import edu.najah.cap.activity.IUserActivityService;
+import edu.najah.cap.activity.UserActivity;
+import edu.najah.cap.activity.UserActivityService;
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
-import edu.najah.cap.exceptions.Util;
-import edu.najah.cap.payment.Transaction;
 
-import java.time.Instant;
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
-public class UserActivityService implements IUserActivityService {
-    public static Map<String, List<UserActivity>> getUserActivityMap() {
-        return userActivityMap;
+public class ActivityProxy implements IUserActivityService {
+
+    private IUserActivityService userActivityService;
+
+    private static final Map<String, List<UserActivity>> userActivityMap = UserActivityService.getUserActivityMap();
+
+    public ActivityProxy(IUserActivityService userActivityService) {
+        this.userActivityService = userActivityService;
     }
-    private static final Map<String, List<UserActivity>> userActivityMap = new HashMap<>();
+
+
     @Override
     public void addUserActivity(UserActivity userActivity) {
-        userActivityMap.computeIfAbsent(userActivity.getUserId(), key -> new ArrayList<>()).add(userActivity);
+        userActivityService.addUserActivity(userActivity);
+
     }
 
     @Override
-    public List<UserActivity> getUserActivity(String userId) throws SystemBusyException, BadRequestException, NotFoundException {
-        Util.validateUserName(userId);
+    public List<UserActivity> getUserActivity(String userId) throws  BadRequestException, NotFoundException {
+        ValidateUser.validateUser(userId);
         if (!userActivityMap.containsKey(userId)) {
             throw new NotFoundException("User does not exist");
         }
         return userActivityMap.get(userId);
+
     }
 
     @Override
     public void removeUserActivity(String userId, String id) throws SystemBusyException, BadRequestException, NotFoundException {
-        Util.validateUserName(userId);
+        ValidateUser.validateUser(userId);
         if (!userActivityMap.containsKey(userId)) {
             throw new NotFoundException("User does not exist");
         }

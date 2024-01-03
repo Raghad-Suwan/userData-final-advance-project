@@ -9,6 +9,9 @@ import java.util.*;
 
 public class PaymentService implements IPayment {
 
+    public static Map<String, List<Transaction>> getTransactionsMap() {
+        return transactionMap;
+    }
     private static final Map<String, List<Transaction>> transactionMap = new HashMap<>();
 
     @Override

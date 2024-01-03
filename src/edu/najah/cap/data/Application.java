@@ -42,6 +42,7 @@ public class Application {
         setLoginUserName(userName);
         //TODO Your application starts here. Do not Change the existing code
 
+        Menu.runner(postService,userService,userActivityService,paymentService);
 
 
         //TODO Your application ends here. Do not Change the existing code
