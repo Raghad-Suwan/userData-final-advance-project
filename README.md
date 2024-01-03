@@ -55,4 +55,12 @@ sure the deleted data depend on user user name , and type , such as the new user
 
 5. System performance
    the well structured classes we create , applying design patterns  
-   The code is simple and clean and easy to understand , we handle errors very well and the scalability is applied. The HardDelete class is designed to delete a user account and all associated data in parallel. Parallel processing indeed speeds up the deletion of items.This approach not only improves the system's performance but also increases its efficiency in handling large volumes of data. The same thing for the data export that is done as fast as it possible. 
+   The code is simple and clean and easy to understand , we handle errors very well and the scalability is applied. The HardDelete class is designed to delete a user account and all associated data in parallel. Parallel processing indeed speeds up the deletion of items.This approach not only improves the system's performance but also increases its efficiency in handling large volumes of data. The same thing for the data export that is done as fast as it possible.
+
+
+[Uploading exported4_from_idea.drawio…]()
+
+
+[Uploading exported4_from_idea.drawio…]()
+
+   
