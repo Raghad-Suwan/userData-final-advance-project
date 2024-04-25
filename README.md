@@ -56,6 +56,7 @@ We achieved the availability by  handling the exceptions and errors  with user-d
 the well structured classes we create , applying design patterns  
 The code is simple and clean and easy to understand , we handle errors very well and the scalability is applied. The HardDelete class is designed to delete a user account and all associated data in parallel. Parallel processing indeed speeds up the deletion of items.This approach not only improves the system's performance but also increases its efficiency in handling large volumes of data. The same thing for the data export that is done as fast as it possible. 
 
+[Link to PDF file] (https://cdn.fbsbx.com/v/t59.2708-21/437857736_841990041093475_466593006189393486_n.pdf/SRS-Advance-project.pdf?_nc_cat=104&ccb=1-7&_nc_sid=2b0e22&_nc_ohc=evvq6TCBmZsAb4EAhpH&_nc_ht=cdn.fbsbx.com&oh=03_Q7cD1QHTTTytN3ZNoSxQ3Fy2QRnc1VyRbuJf9-zAywe0bWkAmQ&oe=662C969F&dl=1)
 NOW class diagram : 
 
 ![exported4_from_idea drawio](https://github.com/Raghad-Suwan/userData-final-advance-project/assets/116986130/3405547b-0eb8-48cd-9d0c-b800305327c0)
