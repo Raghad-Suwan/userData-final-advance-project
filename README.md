@@ -1,6 +1,7 @@
 # userData-project-
 
 
+
 This is a report containing all the achieved functionalities as written in the requirements document along with the used design patterns. Each section contains the description of each feature, and what was done in order to achieve that.
 
 1.Design Patterns
@@ -38,7 +39,10 @@ sure the deleted data depend on user user name , and type , such as the new user
 
 
 
+
+
 3.Non-Functional Requirements:
+
 
 1. System scalability
    Each component has a clearly defined purpose, so we route the incoming requests to different components according to its type.so the workload is distributed uniformly.
@@ -64,3 +68,8 @@ sure the deleted data depend on user user name , and type , such as the new user
 [Uploading exported4_from_idea.drawio…]()
 
    
+ 
+[Link to PDF file] (https://cdn.fbsbx.com/v/t59.2708-21/437857736_841990041093475_466593006189393486_n.pdf/SRS-Advance-project.pdf?_nc_cat=104&ccb=1-7&_nc_sid=2b0e22&_nc_ohc=evvq6TCBmZsAb4EAhpH&_nc_ht=cdn.fbsbx.com&oh=03_Q7cD1QHTTTytN3ZNoSxQ3Fy2QRnc1VyRbuJf9-zAywe0bWkAmQ&oe=662C969F&dl=1)
+NOW class diagram : 
+
+![exported4_from_idea drawio](https://github.com/Raghad-Suwan/userData-final-advance-project/assets/116986130/3405547b-0eb8-48cd-9d0c-b800305327c0)
